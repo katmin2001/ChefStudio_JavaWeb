@@ -77,7 +77,7 @@ public class ContactController extends BaseController{
 //		categoriesService.saveOrUpdate(cate1);
 		//luu anh len server
 		if(!attachmentFile.isEmpty()) {
-			attachmentFile.transferTo(new File("E:/Java_web/upload/"+attachmentFile.getOriginalFilename()));
+			attachmentFile.transferTo(new File("upload/"+attachmentFile.getOriginalFilename()));
 		}
 		model.addAttribute("contact", new Contact());
 		model.addAttribute("message", "Đăng ký thành công!!");	

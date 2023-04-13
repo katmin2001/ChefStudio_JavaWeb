@@ -73,7 +73,7 @@ public class ProductService extends BaseService<Product>{
 		if (!isEmptyUploadFile(productAvatar)) { // có đẩy avatar lên.
 			
 			// tạo đường dẫn tới folder chứa avatar
-			String pathToAvatar = "E:/Java_web/upload/product/avatar/" + productAvatar.getOriginalFilename();
+			String pathToAvatar = "upload/product/avatar/" + productAvatar.getOriginalFilename();
 
 			// lưu avatar vào đường dẫn trên
 			productAvatar.transferTo(new File(pathToAvatar));
@@ -88,7 +88,7 @@ public class ProductService extends BaseService<Product>{
 			for (MultipartFile pic : productPictures) {
 				
 				// lưu ảnh admin đẩy lên vào server
-				pic.transferTo(new File("E:/Java_web/upload/product/pictures/" + pic.getOriginalFilename()));
+				pic.transferTo(new File("upload/product/pictures/" + pic.getOriginalFilename()));
 
 				// tạo mới 1 bản ghi product_images
 				ProductImages pi = new ProductImages();
@@ -117,10 +117,10 @@ public class ProductService extends BaseService<Product>{
 		// có đẩy avartar ??? => xóa avatar cũ đi và thêm avatar mới
 		if (!isEmptyUploadFile(productAvatar)) {
 			// xóa avatar trong folder lên
-			new File("C:/upload/" + productInDb.getAvatar()).delete();
+			new File("upload/" + productInDb.getAvatar()).delete();
 
 			// sử dụng avatar mới
-			productAvatar.transferTo(new File("E:/Java_web/upload/product/avatar/" + productAvatar.getOriginalFilename()));
+			productAvatar.transferTo(new File("upload/product/avatar/" + productAvatar.getOriginalFilename()));
 			p.setAvatar("product/avatar/" + productAvatar.getOriginalFilename());
 		} 
 		else {
@@ -135,7 +135,7 @@ public class ProductService extends BaseService<Product>{
 			if (productInDb.getProductImages() != null && productInDb.getProductImages().size() > 0) {
 				for (ProductImages opi : productInDb.getProductImages()) {
 					// xóa avatar trong folder lên
-					new File("C:/upload/" + opi.getPath()).delete();
+					new File("upload/" + opi.getPath()).delete();
 
 					// xóa dữ liệu trong database
 					productImagesService.delete(opi);
@@ -144,7 +144,7 @@ public class ProductService extends BaseService<Product>{
 
 			// thêm pictures mới
 			for (MultipartFile pic : productPictures) {
-				pic.transferTo(new File("E:/Java_web/upload/product/pictures/" + pic.getOriginalFilename()));
+				pic.transferTo(new File("upload/product/pictures/" + pic.getOriginalFilename()));
 
 				ProductImages pi = new ProductImages();
 				pi.setPath("product/pictures/" + pic.getOriginalFilename());
