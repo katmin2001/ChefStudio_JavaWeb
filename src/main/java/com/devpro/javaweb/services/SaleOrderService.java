@@ -28,15 +28,9 @@ public class SaleOrderService extends BaseService<SaleOrder> {
 
 	}
 
-	public List<SaleOrder> getOrders(User user)
+	public SaleOrder findByCode(String code)
 	{
-		String sql = "select * \n" +
-				"from tbl_saleorder_products sp\n" +
-				"join tbl_saleorder s on sp.saleorder_id = s.id\n" +
-				"join tbl_users u on s.user_id = u.id\n" +
-				"join tbl_products p on p.id = sp.product_id\n" +
-				"where u.id = " + user.getId();
-		return this.getEntitiesByNativeSQL(sql);
-
+		String sql = "select * from tbl_saleorder s where s.code = " + code;
+		return this.getEntityByNativeSQL(sql);
 	}
 }

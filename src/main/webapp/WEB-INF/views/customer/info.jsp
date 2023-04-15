@@ -13,7 +13,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  <link rel="stylesheet" href="${base }/css/register.css">
+  <link rel="stylesheet" href="${base }/css/info.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <title>Thông tin cá nhân</title>
   <jsp:include page="/WEB-INF/views/common/variables.jsp"></jsp:include>
@@ -21,6 +21,15 @@
 <body>
 <jsp:include page="/WEB-INF/views/customer/layout/header.jsp"></jsp:include>
 <div class="container">
+  <div class="frm">
+    <div class="row">
+      <div class="col3"></div>
+      <div class="col6">
+        <h2 style="font-size: 32px;font-weight: 100;">Thông tin
+          cá nhân</h2>
+        <hr>
+      </div>
+    </div>
     <div class="row">
       <div class="col3"> <label for="email">Họ tên</label></div>
       <div class="col6">
@@ -29,20 +38,24 @@
             <div class="input-group-addon">
               <i class="fa-solid fa-user"></i>
             </div>
-            <div type="text" path="name" id="name" class="form-control">${userLogined.name}</div>
+            <div type="text" name="username"
+                 class="form-control">${userLogined.name }
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col3"> <label for="email">Email</label></div>
+      <div class="col3"> <label for="email">Tài khoản</label></div>
       <div class="col6">
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-addon">
               <i class="fa-solid fa-at"></i>
             </div>
-            <div type="text" path="email" id="email" class="form-control" >${userLogined.email}</div>
+            <div type="text" name="username"
+                 class="form-control">${userLogined.username }
+            </div>
           </div>
         </div>
       </div>
@@ -55,7 +68,9 @@
             <div class="input-group-addon">
               <i class="fa-solid fa-phone"></i>
             </div>
-            <div type="text" path="phone" id="phone" class="form-control" >${userLogined.phone}</div>
+            <div type="text" name="username"
+                 class="form-control">${userLogined.phone }
+            </div>
           </div>
         </div>
       </div>
@@ -68,11 +83,44 @@
             <div class="input-group-addon">
               <i class="fa-solid fa-location-dot"></i>
             </div>
-            <div type="text" path="street" id="street" class="form-control" >${userLogined.street}</div>
+            <div type="text" name="username"
+                 class="form-control">${userLogined.street }
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col3"></div>
+      <div class="col6">
+        <h2 style="font-size: 32px;font-weight: 100;">Lịch sử
+          mua hàng</h2>
+        <hr>
+      </div>
+    </div>
+    <div>
+      <table>
+        <tr>
+          <th>Mã đơn hàng</th>
+          <th>Ảnh</th>
+          <th>Tên sản phẩm</th>
+          <th>Giá</th>
+          <th>Khuyến mãi</th>
+          <th>Ngày đặt hàng</th>
+        </tr>
+        <c:forEach items="${myOrders }" var="myOrders">
+        <tr>
+          <td >${myOrders.code }</td>
+          <td  class="center"> <img src="${base}/upload/${myOrders.avatar }" alt="" style="width: 100px; height: 100px; text-align: center;"></td>
+          <td >${myOrders.title }</td>
+          <td >${myOrders.price }</td>
+          <td >${myOrders.priceSale }</td>
+          <td >${myOrders.createdDate }</td>
+        </tr>
+        </c:forEach>
+      </table>
+    </div>
+  </div>
 </div>
 
 
