@@ -114,7 +114,7 @@
                                     <strong>Loại hàng: </strong>${product.categories.name }
                                 </p>
                                 <p>
-                                    <strong>Tình trạng: </strong>Còn hàng
+                                    <strong>Số lượng: </strong>${product.quantity }
                                 </p>
                                 <div class="s_content">
                                     <div class="desc_content">

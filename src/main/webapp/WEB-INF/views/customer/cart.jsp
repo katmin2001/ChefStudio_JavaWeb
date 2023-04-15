@@ -142,6 +142,7 @@
                     </div>
                     <div class="total">
                         <label>Thành tiền</label>
+                        <div class="valueCheck" style="display: none">${mess }</div>
                         <div class="price">
                             <strong><fmt:setLocale value="vi_VN" scope="session" />
                                 <fmt:formatNumber value="${cart.totalPrice }" type="currency" /></strong>
@@ -149,7 +150,7 @@
                         </div>
                     </div>
                     <div class="ctrl">
-                        <button type="submit" onclick="confirm('Thanh toán hoá đơn!')">Tiến hành thanh toán</button>
+                        <button type="submit" >Tiến hành thanh toán</button>
                     </div>
                 </div>
             </div>
@@ -159,5 +160,26 @@
     <jsp:include page="/WEB-INF/views/customer/layout/footer.jsp"></jsp:include>
     <script src="../js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+
+        const myTimeout = setTimeout(myGreeting, 500);
+
+        function myGreeting() {
+
+            const valueCheck = document.querySelector(".valueCheck").innerHTML;
+            if(valueCheck === "OK") {
+                alert("Thanh toán thành công");
+            }
+
+            if (valueCheck === "CART_NULL") {
+                alert("Giỏ hàng trống");
+            }
+
+            if (valueCheck === "NOT_ENOUGH") {
+                alert("Không đủ sản phẩm");
+            }
+        }
+
+    </script>
 </body>
 </html>

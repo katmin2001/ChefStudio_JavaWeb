@@ -52,7 +52,7 @@ public class CartController extends BaseController {
 							   final HttpServletRequest request,
 							   final HttpServletResponse response,
 							   @ModelAttribute("userLogined") User userLogined) throws IOException {
-		
+		model.addAttribute("mess", "OK");
 		// Lấy thông tin khách hàng
 		String customerFullName = request.getParameter("customerFullName");
 		String customerEmail = request.getParameter("customerEmail");
@@ -75,18 +75,31 @@ public class CartController extends BaseController {
 		// lấy giỏ hàng
 		HttpSession session = request.getSession();
 		Cart cart = (Cart) session.getAttribute("cart");
-		
+		if (cart == null) {
+			model.addAttribute("mess", "CART_NULL");
+			return "customer/cart"; // -> đường dẫn tới View.
+		}
+
 		// lấy sản phẩm trong giỏ hàng
 		for (CartItem cartItem : cart.getCartItems()) {
 			// kiểm tra số lượng sản phẩm còn trong kho
 			int exis = productService.getById(cartItem.getProductId()).getQuantity();
-			if(exis > cartItem.getQuanlity()){
+			if (exis >= cartItem.getQuanlity()){
 				SaleOrderProducts saleOrderProducts = new SaleOrderProducts();
 				saleOrderProducts.setProduct(productService.getById(cartItem.getProductId()));
 				saleOrderProducts.setQuality(cartItem.getQuanlity());
 				productService.getById(cartItem.getProductId()).setQuantity(exis - cartItem.getQuanlity());
 				// sử dụng hàm tiện ích add hoặc remove đới với các quan hệ onetomany
 				saleOrder.addSaleOrderProducts(saleOrderProducts);
+				if (exis - cartItem.getQuanlity() == 0) {
+					productService.getById(cartItem.getProductId()).setStatus(false);
+				}
+			}
+			else {
+				model.addAttribute("mess", "NOT_ENOUGH");
+				session.setAttribute("cart", null);
+				session.setAttribute("totalItems", 0);
+				return "customer/cart"; // -> đường dẫn tới View.
 			}
 		}
 		saleOrder.setTotal(calculateTotalPrice(request));

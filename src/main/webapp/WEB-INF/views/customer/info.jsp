@@ -46,15 +46,15 @@
       </div>
     </div>
     <div class="row">
-      <div class="col3"> <label for="email">Tài khoản</label></div>
+      <div class="col3"> <label for="email">Email</label></div>
       <div class="col6">
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-addon">
               <i class="fa-solid fa-at"></i>
             </div>
-            <div type="text" name="username"
-                 class="form-control">${userLogined.username }
+            <div type="text" name="mail"
+                 class="form-control">${userLogined.email }
             </div>
           </div>
         </div>
@@ -104,6 +104,7 @@
           <th>Mã đơn hàng</th>
           <th>Ảnh</th>
           <th>Tên sản phẩm</th>
+          <th>Số lượng</th>
           <th>Giá</th>
           <th>Khuyến mãi</th>
           <th>Ngày đặt hàng</th>
@@ -113,8 +114,9 @@
           <td >${myOrders.code }</td>
           <td  class="center"> <img src="${base}/upload/${myOrders.avatar }" alt="" style="width: 100px; height: 100px; text-align: center;"></td>
           <td >${myOrders.title }</td>
+          <td >${myOrders.quality}</td>
           <td >${myOrders.price }</td>
-          <td >${myOrders.priceSale }</td>
+          <td >${((myOrders.price-myOrders.priceSale)/ myOrders.price)*100}%</td>
           <td >${myOrders.createdDate }</td>
         </tr>
         </c:forEach>
