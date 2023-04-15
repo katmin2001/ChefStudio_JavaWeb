@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.devpro.javaweb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,9 +48,10 @@ public class CartController extends BaseController {
 	}
 	
 	@RequestMapping(value = { "/cart/checkout" }, method = RequestMethod.POST)
-	public String cartFinished(final Model model, 
-						   final HttpServletRequest request, 
-						   final HttpServletResponse response) throws IOException {
+	public String cartFinished(final Model model,
+							   final HttpServletRequest request,
+							   final HttpServletResponse response,
+							   @ModelAttribute("userLogined") User userLogined) throws IOException {
 		
 		// Lấy thông tin khách hàng
 		String customerFullName = request.getParameter("customerFullName");
@@ -58,6 +61,11 @@ public class CartController extends BaseController {
 
 		// tạo hóa đơn + với thông tin khách hàng lấy được
 		SaleOrder saleOrder = new SaleOrder();
+
+		// kiểm tra user login chưa
+		if (userLogined != null) {
+			saleOrder.setUser(userLogined);
+		}
 		saleOrder.setCustomerName(customerFullName);
 		saleOrder.setCustomerEmail(customerEmail);
 		saleOrder.setCustomerAddress(customerAddress);

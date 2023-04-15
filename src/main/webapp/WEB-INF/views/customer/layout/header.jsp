@@ -80,29 +80,35 @@
                             </div>
                         </div>
                         <div class="user">
-                            <a href="">
+                            <c:if test="${not empty userLogined.username }">
+                            <a href="${base }/order/me">
                                 <i class="fa-solid fa-circle-user"></i>
                             </a>
                             <div class="ct_right">
-                                <c:if test="${not empty userLogined.username }">
+
                                 <div class="tk">
-                                    <a href="">${userLogined.username }</a>
+                                    <a href="${base }/order/me">${userLogined.username }</a>
                                 </div>
                                 <div class="ct">
                                         <a href="${base }/logout">Đăng xuất</a>
                                 </div>
-                                </c:if>
-                                <c:if test="${empty userLogined.username }">
-                                <div class="tk">
-                                    <a href="">Tài khoản</a>
-                                </div>
-                                <div class="ct">
+                            </div>
+                            </c:if>
+                            <c:if test="${empty userLogined.username }">
+                            <a href="${base }">
+                                <i class="fa-solid fa-circle-user"></i>
+                            </a>
+                            <div class="ct_right">
+
+                                    <div class="tk">
+                                        <a href="">Tài khoản</a>
+                                    </div>
+                                    <div class="ct">
                                         <a href="${base }/login">Đăng nhập</a>
                                         <a href="${base }/register">Đăng ký</a>
-                                </div>
-                                </c:if>
+                                    </div>
                             </div>
-                            
+                            </c:if>
                         </div>
                     </div>
                 </div>
