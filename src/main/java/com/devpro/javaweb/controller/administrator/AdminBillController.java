@@ -1,11 +1,15 @@
 package com.devpro.javaweb.controller.administrator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.devpro.javaweb.dto.OrderDetail;
+import com.devpro.javaweb.services.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,8 +30,11 @@ import com.devpro.javaweb.services.SaleOrderService;
 public class AdminBillController extends BaseController{
 	@Autowired
 	private SaleOrderService saleOrderService;
+
+	@Autowired
+	private OrderDetailService orderDetailService;
 	@RequestMapping(value = { "/addBill" }, method = RequestMethod.GET)
-	public String getCategory(final Model model, 
+	public String getBill(final Model model,
 			final HttpServletRequest request, 
 			final HttpServletResponse response) {
 		// đẩy danh sách categories xuống view(thêm mới sản phẩm)
@@ -39,7 +46,7 @@ public class AdminBillController extends BaseController{
 		return "administrator/addBill"; 
 	}
 	@RequestMapping(value = { "/addBill/{billId}" }, method = RequestMethod.GET)
-	public String adminCategoryEdit(final Model model, 
+	public String adminBillEdit(final Model model,
 								   final HttpServletRequest request,
 								   final HttpServletResponse response, 
 								   @PathVariable("billId") int billId) {
@@ -53,7 +60,7 @@ public class AdminBillController extends BaseController{
 		return "administrator/addBill";
 	}
 	@RequestMapping(value = { "/addBill" }, method = RequestMethod.POST)
-	public String adminCategoryAddOrUpdate(final Model model, 
+	public String adminBillAddOrUpdate(final Model model,
 										  final HttpServletRequest request,
 										  final HttpServletResponse response,
 										  final @ModelAttribute("saleOrder") SaleOrder saleOrder
@@ -63,7 +70,7 @@ public class AdminBillController extends BaseController{
 		return "redirect:/admin/showBill";
 	}
 	@RequestMapping(value = { "/showBill" }, method = RequestMethod.GET)
-	public String showCategory(final Model model, 
+	public String showBill(final Model model,
 			final HttpServletRequest request, 
 			final HttpServletResponse response) {
 		// đẩy danh sách categories xuống view(thêm mới sản phẩm)
@@ -81,6 +88,23 @@ public class AdminBillController extends BaseController{
 //			model.addAttribute("searchModel", searchModel);
 		return "administrator/showBill"; 
 	}
+
+	@RequestMapping(value = { "/showBill/{billId}" }, method = RequestMethod.GET)
+	public String showDetailBill(final Model model,
+							   final HttpServletRequest request,
+							   final HttpServletResponse response,
+								 @PathVariable("billId") int billId) {
+		List<OrderDetail> orderDetailList = orderDetailService.getOrdersById(billId);
+		List<OrderDetail> newOrderDetailList = new ArrayList<>();
+		for (OrderDetail orderDetail: orderDetailList) {
+			SaleOrder saleOrder = saleOrderService.findByCode(orderDetail.getCode());
+			orderDetail.setCreatedDate(saleOrder.getCreatedDate());
+			newOrderDetailList.add(orderDetail);
+		}
+		model.addAttribute("ordersDetail", newOrderDetailList);
+		return "administrator/showDetailBill";
+	}
+
 	@RequestMapping(value = { "/delete2" }, method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> deleteBill(final Model model, 
 															final HttpServletRequest request,
