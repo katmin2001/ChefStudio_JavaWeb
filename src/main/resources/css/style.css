@@ -12,7 +12,10 @@
     bottom: 45px;
     z-index: 99;
 }
-
+.btn.btn-primary {
+    width: 62px !important;
+    margin: 3px 0 !important;
+}
 
 /*** Spinner ***/
 #spinner {

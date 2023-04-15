@@ -283,6 +283,7 @@
                                             <c:if test="${saleOrder.status==false}">
                                                 <a class="btn btn-danger" role="button" onclick="ActiveBill(${saleOrder.id});">Active</a>
                                             </c:if>
+                                            <a class="btn btn-primary" href="${base }" role="button">View</a>
                                         </div>
                                     </td>
                                 </tr>
