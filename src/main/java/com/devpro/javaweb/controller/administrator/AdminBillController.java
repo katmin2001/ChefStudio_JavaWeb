@@ -102,7 +102,7 @@ public class AdminBillController extends BaseController{
 			newOrderDetailList.add(orderDetail);
 		}
 		model.addAttribute("ordersDetail", newOrderDetailList);
-		return "administrator/showDetailBill";
+		return "administrator/showBillDetail";
 	}
 
 	@RequestMapping(value = { "/delete2" }, method = RequestMethod.POST)
