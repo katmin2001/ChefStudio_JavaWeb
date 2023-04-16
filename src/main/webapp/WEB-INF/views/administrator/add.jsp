@@ -222,7 +222,7 @@
                             </div> -->
                             
                             <!-- <a href="/admin/product/list" class="btn btn-secondary active" role="button" aria-pressed="true">Back to list</a> -->
-                            <button type="submit" class="btn btn-primary">Save Product</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </sf:form>
                         
                     </div>
