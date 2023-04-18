@@ -146,7 +146,7 @@
                             </div>
                         </div>
                         <div class="chart" style="margin-top: 20px">
-                            <label style="font-size: large; font-weight: 600; color: blue">Revenue in ${disYear }</label>
+                            <label style="font-size: large; font-weight: 600; color: #0d6efd">Revenue in ${disYear }</label>
                             <canvas id="myChart"></canvas>
                         </div>
                 </div>
@@ -190,7 +190,7 @@
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
-                    label: 'Revenue',
+                    label: 'Revenue (VNĐ)',
                     data: ${dataSales },
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.5)',

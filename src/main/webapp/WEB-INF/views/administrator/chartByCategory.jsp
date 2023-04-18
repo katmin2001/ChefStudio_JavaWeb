@@ -136,7 +136,7 @@
 <%--                <canvas id="myChart"></canvas>--%>
                 <div class="vh-100 bg-light rounded align-items-start justify-content-center">
                         <div class="chart">
-                            <label style="font-size: 30px; font-weight: 600; color: blue">Revenue By Category</label>
+                            <label style="font-size: 30px; font-weight: 600; color: #0d6efd">Revenue By Category</label>
                         </div>
                         <canvas id="myChart"></canvas>
                 </div>
@@ -180,7 +180,7 @@
             data: {
                 labels: ${cate },
                 datasets: [{
-                    label: 'Revenue',
+                    label: 'Revenue (VNĐ)',
                     data: ${dataSalesByCategory },
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.5)',
