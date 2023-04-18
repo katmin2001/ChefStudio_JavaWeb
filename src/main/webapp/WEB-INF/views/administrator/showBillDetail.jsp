@@ -71,8 +71,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/admin/addProduct" class="dropdown-item">Add Product</a>
-                            <a href="/admin/showProduct" class="dropdown-item active">Show Product</a>
-
+                            <a href="/admin/showProduct" class="dropdown-item">Show Product</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
@@ -86,20 +85,15 @@
                         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Bill</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/admin/addBill" class="dropdown-item">Add Bill</a>
-                            <a href="/admin/showBill" class="dropdown-item">Show Bill</a>
+                            <a href="/admin/showBill" class="dropdown-item active">Show Bill</a>
                         </div>
                     </div>
                     <a href="/admin/show-contact" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Show Contact</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">Sign In</a>
-                            <a href="signup.html" class="dropdown-item">Sign Up</a>
-                            <a href="404.html" class="dropdown-item">404 Error</a>
-                            <a href="blank.html" class="dropdown-item">Blank Page</a>
+                            <a href="/admin/revenue-by-month/0" class="dropdown-item">Revenue By Month</a>
+                            <a href="/admin/revenue-by-year" class="dropdown-item">Revenue By Year</a>
                         </div>
                     </div>
                 </div>

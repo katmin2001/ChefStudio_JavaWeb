@@ -6,11 +6,11 @@
 <!-- sf: spring-form -->
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
-    <title>Add Categories</title>
+    <title>Chart Sales</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -27,6 +27,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
+    <!-- Libraries Stylesheet -->
 
 
     <!-- Customized Bootstrap Stylesheet -->
@@ -77,9 +78,9 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Category</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Category</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="/admin/addCategory" class="dropdown-item active">Add Category</a>
+                            <a href="/admin/addCategory" class="dropdown-item">Add Category</a>
                             <a href="/admin/showCategory" class="dropdown-item">Show Category</a>
                         </div>
                     </div>
@@ -92,10 +93,10 @@
                     </div>
                     <a href="/admin/show-contact" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Show Contact</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-chart-bar me-2"></i>Charts</a>
+                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/admin/revenue-by-month/0" class="dropdown-item">Revenue By Month</a>
-                            <a href="/admin/revenue-by-year" class="dropdown-item">Revenue By Year</a>
+                            <a href="/admin/revenue-by-year" class="dropdown-item active">Revenue By Year</a>
                         </div>
                     </div>
                 </div>
@@ -129,43 +130,17 @@
 
             <!-- Blank Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="row vh-100 bg-light rounded align-items-start justify-content-center mx-0">
-                    <c:if test="${not empty message }">
-                        <div class="alert alert-primary" role="alert">
-                            ${message }
+<%--                <div class="chart">--%>
+<%--                    <label style="font-size: 30px; font-weight: 600; color: blue">Annual Revenue</label>--%>
+<%--                </div>--%>
+<%--                <canvas id="myChart"></canvas>--%>
+                <div class="vh-100 bg-light rounded align-items-start justify-content-center">
+                        <div class="chart">
+                            <label style="font-size: 30px; font-weight: 600; color: blue">Annual Revenue</label>
                         </div>
-                    </c:if>                    
-                    <div class="card">
-                    <div class="card-header bg-primary text-white">Add/Update Category</div>
-                    <div class="card-body">
-                        
-                        
-                        <!-- Cách 2: Sử dụng spring-form -->
-                        <!-- bước 1 import thư viện taglib spring form -->
-                        <!-- bước 2 sử dụng các thẻ spring form -->
-                        <sf:form modelAttribute="category" action="${base }/admin/addCategory" method="post" enctype="multipart/form-data">
-                            <div class="form-group mb-2">
-                                <label for="categoryId">Category Id</label>
-                                <sf:input path="id" id="categoryId" class="form-control"></sf:input>
-                            </div>
-                            
-                            <div class="form-group mb-2">
-                                <label for="name">Name (required)</label>
-                                <sf:input path="name" autocomplete="off" type="text" class="form-control" id="name" placeholder="Name" required="required"></sf:input>
-                            </div>
-             
-                            
-                            <div class="form-group mb-2">
-                                <label for="description">Description (required)</label>
-                                <sf:textarea autocomplete="off" path="description" class="form-control" placeholder="Description" id="description" rows="3" required="required"></sf:textarea>
-                            </div>
-                            
-                            
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </sf:form>
-                        
-                    </div>
+                        <canvas id="myChart"></canvas>
                 </div>
+
             </div>
             <!-- Blank End -->
 
@@ -193,9 +168,66 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
+
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript">
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ${year },
+                datasets: [{
+                    label: 'Revenue',
+                    data: ${dataSalesByYear },
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)',
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5 )'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <!-- Template Javascript -->
     <script src="http://localhost:8081/js/main.js"></script>
@@ -204,6 +236,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#detail_description').summernote();
+            $('#short_description').summernote();
         });
     </script>
 </body>
