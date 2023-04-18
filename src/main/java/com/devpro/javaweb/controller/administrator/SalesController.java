@@ -2,6 +2,9 @@ package com.devpro.javaweb.controller.administrator;
 
 import com.devpro.javaweb.controller.BaseController;
 import com.devpro.javaweb.dto.SalesData;
+import com.devpro.javaweb.dto.SalesDataByCategories;
+import com.devpro.javaweb.model.Categories;
+import com.devpro.javaweb.services.CategoriesService;
 import com.devpro.javaweb.services.SalesService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +23,13 @@ import java.util.List;
 public class SalesController extends BaseController {
     @Autowired
     private SalesService salesService;
+    @Autowired
+    private CategoriesService categoriesService;
 
+    @ModelAttribute("categories")
+    public List<Categories> getAllCategories() {
+        return categoriesService.findAll();
+    }
     @RequestMapping(value = { "admin/revenue-by-month/{year}" }, method = RequestMethod.GET)
     public String getRevenue(final Model model,
                              final HttpServletRequest request,
@@ -74,5 +83,47 @@ public class SalesController extends BaseController {
         model.addAttribute("dataSalesByYear", salesJSON);
 
         return "administrator/chartByYear";
+    }
+    @RequestMapping(value = { "admin/revenue-by-category" }, method = RequestMethod.GET)
+    public String getRevenueByCategory(final Model model,
+                                   final HttpServletRequest request,
+                                   final HttpServletResponse response
+    ) throws IOException {
+        // tính toán doanh thu theo sản phẩm và lưu vào mảng data
+        List<SalesDataByCategories> salesData = salesService.SalesByCategory();
+        List<BigDecimal> dataSales = new ArrayList<>();
+        List<String> category = new ArrayList<>();
+        List<Categories> t1 = getAllCategories();
+        for(Categories categories: t1){
+            category.add(categories.getName());
+        }
+        boolean check = false;
+        for(String i: category){
+            check = false;
+            for(SalesDataByCategories sales: salesData){
+                if (i.equals(sales.getNameCategory())){
+                    dataSales.add(sales.getSales());
+                    check = true;
+                    break;
+                }
+            }
+            if(check == false){
+                dataSales.add(BigDecimal.valueOf(0));
+            }
+        }
+//        for(SalesDataByCategories sales: salesData){
+//            System.out.println(sales.getNameCategory()+" "+sales.getSales());
+//        }
+//        for(BigDecimal data: dataSales){
+//            System.out.print(data+" ");
+//        }
+        ObjectMapper mapper = new ObjectMapper();
+        String salesJSON = mapper.writeValueAsString(dataSales);
+        String cateJSON = mapper.writeValueAsString(category);
+        // truyền dữ liệu vào model attribute "data"
+        model.addAttribute("cate", cateJSON);
+        model.addAttribute("dataSalesByCategory", salesJSON);
+
+        return "administrator/chartByCategory";
     }
 }

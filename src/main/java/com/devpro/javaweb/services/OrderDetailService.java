@@ -33,4 +33,5 @@ public class OrderDetailService extends BaseService<OrderDetail>{
                 "where s.id = " + id;
         return this.getEntitiesByNativeSQL(sql);
     }
+
 }

@@ -6,11 +6,11 @@
 <!-- sf: spring-form -->
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
-    <title>Show contact</title>
+    <title>Chart Sales</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -27,6 +27,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
+    <!-- Libraries Stylesheet -->
 
 
     <!-- Customized Bootstrap Stylesheet -->
@@ -34,7 +35,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
     <!-- Template Stylesheet -->
-    <link href="${base }/css/style.css" rel="stylesheet">
+    <link href="http://localhost:8081/css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 
 <body>
@@ -56,7 +60,7 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="../images/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" src="http://localhost:8081/images/user.jpg" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -87,13 +91,13 @@
                             <a href="/admin/showBill" class="dropdown-item">Show Bill</a>
                         </div>
                     </div>
-                    <a href="/admin/show-contact" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>Show Contact</a>
+                    <a href="/admin/show-contact" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Show Contact</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-chart-bar me-2"></i>Charts</a>
+                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/admin/revenue-by-month/0" class="dropdown-item">Revenue By Month</a>
                             <a href="/admin/revenue-by-year" class="dropdown-item">Revenue By Year</a>
-                            <a href="/admin/revenue-by-category" class="dropdown-item">Revenue By Category</a>
+                            <a href="/admin/revenue-by-category" class="dropdown-item active">Revenue By Category</a>
                         </div>
                     </div>
                 </div>
@@ -126,34 +130,35 @@
 
             <!-- Blank Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="row vh-100 bg-light rounded align-items-start justify-content-center mx-0">
-                        <table class="table">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Message</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${contact }" var="contact">
-                                <tr> 
-                                    <th scope="row">${contact.createdDate }</th>
-                                    <td>${contact.firstName } ${contact.lastName }</td>
-                                    <td>${contact.email }</td>
-                                    <td>${contact.message }</td>
-                                </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
+<%--                <div class="chart">--%>
+<%--                    <label style="font-size: 30px; font-weight: 600; color: blue">Annual Revenue</label>--%>
+<%--                </div>--%>
+<%--                <canvas id="myChart"></canvas>--%>
+                <div class="vh-100 bg-light rounded align-items-start justify-content-center">
+                        <div class="chart">
+                            <label style="font-size: 30px; font-weight: 600; color: blue">Revenue By Category</label>
+                        </div>
+                        <canvas id="myChart"></canvas>
                 </div>
+
             </div>
             <!-- Blank End -->
 
 
             <!-- Footer Start -->
-           
+            <!-- <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            
+                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
             <!-- Footer End -->
         </div>
         <!-- Content End -->
@@ -163,13 +168,77 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
+
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript">
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ${cate },
+                datasets: [{
+                    label: 'Revenue',
+                    data: ${dataSalesByCategory },
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)',
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5 )'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- Template Javascript -->
-    <script src="../js/main.js"></script>
+    <script src="http://localhost:8081/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#detail_description').summernote();
+            $('#short_description').summernote();
+        });
+    </script>
 </body>
 
 </html>

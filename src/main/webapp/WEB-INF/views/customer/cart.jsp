@@ -150,7 +150,7 @@
                         </div>
                     </div>
                     <div class="ctrl">
-                        <button type="submit" >Tiến hành thanh toán</button>
+                        <button type="submit" >Tiến hành đặt hàng</button>
                     </div>
                 </div>
             </div>
@@ -168,15 +168,15 @@
 
             const valueCheck = document.querySelector(".valueCheck").innerHTML;
             if(valueCheck === "OK") {
-                alert("Thanh toán thành công");
+                alert("Đặt hàng thành công!");
             }
 
             if (valueCheck === "CART_NULL") {
-                alert("Giỏ hàng trống");
+                alert("Giỏ hàng trống!");
             }
 
             if (valueCheck === "NOT_ENOUGH") {
-                alert("Không đủ sản phẩm");
+                alert("Không đủ sản phẩm!");
             }
         }
 

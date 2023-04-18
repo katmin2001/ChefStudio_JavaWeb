@@ -5,9 +5,34 @@
 <!-- sf: spring-form -->
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <div class="banner">
-        <a href="">
-            <img src="../images/banner.jpg" width="100%" height="100%">
-        </a>
+<%--        <a href="">--%>
+<%--            <img src="../images/banner.jpg" width="100%" height="100%">--%>
+<%--        </a>--%>
+        <div class="slideshow-container">
+
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="../images/banner.jpg" width="100%" height="100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="../images/banner-ve-chung-toi-3.jpg" width="100%" height="100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="../images/bannerthang3.jpg" width="100%" height="100%">
+            </div>
+
+        </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
     </div>
     <div class="th">
         <div class="title">thương hiệu phân phối</div>
@@ -112,3 +137,24 @@
             </div>
         </div>
     </div>
+<script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 3000); // Change image every 2 seconds
+    }
+</script>

@@ -92,6 +92,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/admin/revenue-by-month/0" class="dropdown-item">Revenue By Month</a>
                             <a href="/admin/revenue-by-year" class="dropdown-item">Revenue By Year</a>
+                            <a href="/admin/revenue-by-category" class="dropdown-item">Revenue By Category</a>
                         </div>
                     </div>
                 </div>
@@ -114,7 +115,6 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="/order/me" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
                             <a href="${base }/logout" class="dropdown-item">Log Out</a>
                         </div>
                     </div>

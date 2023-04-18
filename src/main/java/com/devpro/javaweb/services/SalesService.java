@@ -1,6 +1,7 @@
 package com.devpro.javaweb.services;
 
 import com.devpro.javaweb.dto.SalesData;
+import com.devpro.javaweb.dto.SalesDataByCategories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +55,27 @@ public class SalesService{
         for (Object[] result : results) {
             SalesData salesData = new SalesData();
             salesData.setMonth(Integer.parseInt(result[0].toString()));
+            salesData.setSales((BigDecimal) result[1]);
+            sales.add(salesData);
+        }
+        return sales;
+    }
+    public List<SalesDataByCategories> SalesByCategory(){
+        List<SalesDataByCategories> sales = new ArrayList<>();
+        String sql = "with r as(\n" +
+                "select s.product_id, sum(s.quality) as quanlity, p.category_id, sum(s.quality) * p.price_sale as sales, c.name\n" +
+                "FROM javaweb20_db_v2.tbl_saleorder_products s\n" +
+                "join javaweb20_db_v2.tbl_products p on s.product_id = p.id\n" +
+                "join javaweb20_db_v2.tbl_category c on c.id = p.category_id\n" +
+                "group by s.product_id\n" +
+                ")\n" +
+                "select r.name, sum(r.sales) as total_sales from r\n" +
+                "group by r.category_id";
+        Query query = entityManager.createNativeQuery(sql);
+        List<Object[]> results = query.getResultList();
+        for (Object[] result : results) {
+            SalesDataByCategories salesData = new SalesDataByCategories();
+            salesData.setNameCategory(result[0].toString());
             salesData.setSales((BigDecimal) result[1]);
             sales.add(salesData);
         }

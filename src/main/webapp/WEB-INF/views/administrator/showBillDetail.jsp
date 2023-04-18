@@ -52,8 +52,8 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ADMIN</h3>
+                <a href="/admin" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>CHEF STUDIO</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -94,6 +94,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/admin/revenue-by-month/0" class="dropdown-item">Revenue By Month</a>
                             <a href="/admin/revenue-by-year" class="dropdown-item">Revenue By Year</a>
+                            <a href="/admin/revenue-by-category" class="dropdown-item">Revenue By Category</a>
                         </div>
                     </div>
                 </div>
@@ -116,7 +117,6 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="/order/me" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
                             <a href="${base }/logout" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
