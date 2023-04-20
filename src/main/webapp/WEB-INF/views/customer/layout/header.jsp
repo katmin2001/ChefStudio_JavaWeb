@@ -6,7 +6,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
     <header>
         <div class="top text-right">
             <div class="container">
@@ -114,20 +113,22 @@
                 </div>
             </div>
         </div>
-        <div class="main-bar">
-            <div class="container-fluid">
-                <div class="main-nav">
-                    <ul>
-                        <li>
-                            <a href="/" class="active"><i class="fa-solid fa-house-chimney"></i></a>
-                        </li>
-                        <c:forEach items="${categories}" var="category">
-                            <li>
-                                <a href="${base }/product-list/${category.seo }">${category.name }</a>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
     </header>
+<div class="main-bar" style="position: sticky;z-index: 100000;top: 0">
+    <div class="container-fluid">
+        <div class="main-nav">
+            <ul>
+                <li>
+                    <a href="/" class="active"><i class="fa-solid fa-house-chimney"></i></a>
+                </li>
+                <c:forEach items="${categories}" var="category">
+                    <li>
+                        <a href="${base }/product-list/${category.seo }">${category.name }</a>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+</div>
+
