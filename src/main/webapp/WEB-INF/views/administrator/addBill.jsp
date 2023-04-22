@@ -83,13 +83,7 @@
                             <a href="/admin/showCategory" class="dropdown-item">Show Category</a>
                         </div>
                     </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Bill</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="/admin/addBill" class="dropdown-item active">Add Bill</a>
-                            <a href="/admin/showBill" class="dropdown-item">Show Bill</a>
-                        </div>
-                    </div>
+                    <a href="/admin/showBill" class="nav-item nav-link"><i class="fas fa-money-bill"></i>&nbsp Show Bill</a>
                     <a href="/admin/show-contact" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Show Contact</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-chart-bar me-2"></i>Charts</a>
@@ -145,7 +139,7 @@
                         <!-- bước 2 sử dụng các thẻ spring form -->
                         <sf:form modelAttribute="saleOrder" action="${base }/admin/addBill" method="post" enctype="multipart/form-data">
                             <div class="form-group mb-2">
-                                <label for="categoryId">Category Id</label>
+                                <label for="categoryId">Id</label>
                                 <sf:input path="id" id="saleOrderId" class="form-control"></sf:input>
                             </div>
                             <div class="form-group mb-2">
