@@ -20,7 +20,7 @@ public class SalesService{
        List<SalesData> sales = new ArrayList<>();
        String sql = "SELECT MONTH(s.created_date) as month, SUM(s.total) as sales \n" +
                "FROM tbl_saleorder s\n" +
-               "WHERE YEAR(s.created_date) = '"+year+"'\n" +
+               "WHERE YEAR(s.created_date) = '"+year+"' and s.status_order = 'Nhận hàng thành công'\n" +
                "GROUP BY MONTH(s.created_date)\n" +
                "HAVING sales > 0\n" +
                "ORDER BY month ASC";
@@ -39,6 +39,7 @@ public class SalesService{
         List<String> year;
         String sql = "select distinct year(s.created_date) as year\n" +
                 "FROM tbl_saleorder s\n" +
+                "where s.status_order = 'Nhận hàng thành công'\n" +
                 "ORDER BY year ASC";
         Query query = entityManager.createNativeQuery(sql);
         year = query.getResultList();
@@ -48,6 +49,7 @@ public class SalesService{
         List<SalesData> sales = new ArrayList<>();
         String sql = "select year(s.created_date) as year, sum(s.total) as sales\n" +
                 "FROM javaweb20_db_v2.tbl_saleorder s\n" +
+                "where s.status_order = 'Nhận hàng thành công'\n" +
                 "GROUP BY year(s.created_date)\n" +
                 "ORDER BY year ASC";
         Query query = entityManager.createNativeQuery(sql);
@@ -62,11 +64,12 @@ public class SalesService{
     }
     public List<SalesDataByCategories> SalesByCategory(){
         List<SalesDataByCategories> sales = new ArrayList<>();
-        String sql = "with r as(\n" +
-                "select s.product_id, sum(s.quality) as quanlity, p.category_id, sum(s.quality) * p.price_sale as sales, c.name\n" +
+        String sql = "with r as(select s.product_id, sum(s.quality) as quanlity, p.category_id, sum(s.quality) * p.price_sale as sales, c.name\n" +
                 "FROM javaweb20_db_v2.tbl_saleorder_products s\n" +
                 "join javaweb20_db_v2.tbl_products p on s.product_id = p.id\n" +
                 "join javaweb20_db_v2.tbl_category c on c.id = p.category_id\n" +
+                "join javaweb20_db_v2.tbl_saleorder so on so.id = s.saleorder_id\n" +
+                "where so.status_order = 'Nhận hàng thành công'\n" +
                 "group by s.product_id\n" +
                 ")\n" +
                 "select r.name, sum(r.sales) as total_sales from r\n" +
