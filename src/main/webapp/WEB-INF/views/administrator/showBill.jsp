@@ -82,13 +82,7 @@
                             <a href="/admin/showCategory" class="dropdown-item">Show Category</a>
                         </div>
                     </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Bill</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="/admin/addBill" class="dropdown-item">Add Bill</a>
-                            <a href="/admin/showBill" class="dropdown-item active">Show Bill</a>
-                        </div>
-                    </div>
+                    <a href="/admin/showBill" class="nav-item nav-link"><i class="fas fa-money-bill"></i>&nbsp Show Bill</a>
                     <a href="/admin/show-contact" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Show Contact</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-chart-bar me-2"></i>Charts</a>
@@ -148,11 +142,11 @@
 								
 								<button type="submit" id="btnSearch" name="btnSearch" value="Search" class="btn btn-primary">Seach</button> -->
 							</div>
-							<div>
-								<a class="btn btn-outline-primary mb-1" href="${base }/admin/addBill" role="button">
-									Add New
-								</a>
-							</div>
+<%--							<div>--%>
+<%--								<a class="btn btn-outline-primary mb-1" href="${base }/admin/addBill" role="button">--%>
+<%--									Add New--%>
+<%--								</a>--%>
+<%--							</div>--%>
 						</div>
                         <table class="table">
                             <thead class="thead-dark">
@@ -181,19 +175,8 @@
                                     <td>${saleOrder.customerAddress }</td>
                                     <td>${saleOrder.customerPhone }</td>
                                     <td>${saleOrder.customerEmail }</td>
-                                    
-                                    <!-- <td>${product.avatar }</td> -->
                                     <td>
-                                        <span id="_saleOrder_status_${saleOrder.id} }">
-                                            <c:choose>
-                                                <c:when test="${saleOrder.status }">
-                                                    <input type="checkbox" checked="checked" readonly="readonly">
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <input type="checkbox" readonly="readonly">
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </span>
+                                            ${saleOrder.order_status }
                                     </td>
                                     <td>
                                         <fmt:setLocale value="vi_VN" scope="session" />
@@ -202,12 +185,12 @@
                                     <td width="15%">
                                         <div>
                                             <a class="btn btn-primary" href="${base }/admin/addBill/${saleOrder.id}" role="button">Edit</a>
-                                            <c:if test="${saleOrder.status==true}">
-                                                <a class="btn btn-danger" role="button" onclick="DeleteBill(${saleOrder.id});">Done</a>
-                                            </c:if>
-                                            <c:if test="${saleOrder.status==false}">
-                                                <a class="btn btn-danger" role="button" onclick="ActiveBill(${saleOrder.id});">Active</a>
-                                            </c:if>
+<%--                                            <c:if test="${saleOrder.status==true}">--%>
+<%--                                                <a class="btn btn-danger" role="button" onclick="DeleteBill(${saleOrder.id});">Done</a>--%>
+<%--                                            </c:if>--%>
+<%--                                            <c:if test="${saleOrder.status==false}">--%>
+<%--                                                <a class="btn btn-danger" role="button" onclick="ActiveBill(${saleOrder.id});">Active</a>--%>
+<%--                                            </c:if>--%>
                                             <a class="btn btn-primary" href="${base }/admin/showBill/${saleOrder.id}" role="button">View</a>
                                         </div>
                                     </td>
