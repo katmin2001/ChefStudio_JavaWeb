@@ -178,6 +178,7 @@
             if (valueCheck === "NOT_ENOUGH") {
                 alert("Không đủ sản phẩm!");
             }
+
         }
 
     </script>

@@ -138,6 +138,7 @@
 
 <%--                                <button type="submit" class="btn btn-primary" value="Submit">Seach</button>--%>
                             </div>
+                            <a href="${base }/admin/revenue-by-month/export/${disYear }">Export excel</a>
                         </div>
                         <div class="chart" style="margin-top: 20px">
                             <label style="font-size: large; font-weight: 600; color: #0d6efd">Revenue in ${disYear }</label>

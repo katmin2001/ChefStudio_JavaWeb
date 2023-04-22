@@ -52,6 +52,13 @@ public class CartController extends BaseController {
 							   final HttpServletRequest request,
 							   final HttpServletResponse response,
 							   @ModelAttribute("userLogined") User userLogined) throws IOException {
+		HttpSession session = request.getSession();
+		// Kiểm tra user login chưa
+		if (userLogined.getName() == null) {
+			session.setAttribute("cart", null);
+			session.setAttribute("totalItems", 0);
+			return "customer/login";
+		}
 		model.addAttribute("mess", "OK");
 		// Lấy thông tin khách hàng
 		String customerFullName = request.getParameter("customerFullName");
@@ -73,7 +80,7 @@ public class CartController extends BaseController {
 		saleOrder.setCode(String.valueOf(System.currentTimeMillis())); // mã hóa đơn
 		
 		// lấy giỏ hàng
-		HttpSession session = request.getSession();
+
 		Cart cart = (Cart) session.getAttribute("cart");
 		if (cart == null) {
 			model.addAttribute("mess", "CART_NULL");

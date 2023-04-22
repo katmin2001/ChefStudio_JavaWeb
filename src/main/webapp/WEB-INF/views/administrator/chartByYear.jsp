@@ -123,6 +123,7 @@
 
 
             <!-- Blank Start -->
+            <a href="${base }/admin/revenue-by-year/export">Export excel</a>
             <div class="container-fluid pt-4 px-4">
 <%--                <div class="chart">--%>
 <%--                    <label style="font-size: 30px; font-weight: 600; color: blue">Annual Revenue</label>--%>
