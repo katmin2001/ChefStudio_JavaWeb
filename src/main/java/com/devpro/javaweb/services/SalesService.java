@@ -20,7 +20,7 @@ public class SalesService{
        List<SalesData> sales = new ArrayList<>();
        String sql = "SELECT MONTH(s.created_date) as month, SUM(s.total) as sales \n" +
                "FROM tbl_saleorder s\n" +
-               "WHERE YEAR(s.created_date) = '"+year+"' and s.status_order = 'Nhận hàng thành công'\n" +
+               "WHERE YEAR(s.created_date) = '"+year+"' and s.status_order = 'Nhận hàng thành công'" +
                "GROUP BY MONTH(s.created_date)\n" +
                "HAVING sales > 0\n" +
                "ORDER BY month ASC";
