@@ -33,7 +33,7 @@
                                     <div class="col_item">
                                         <div class="cart_pro">
                                             <a href="">
-                                                <img src="${base }/upload/${ci.image }" width="100%">
+                                                <img src="${base }/upload/${ci.image }" width="80px" height="80px">
                                             </a>
                                             <div class="ct">
                                                 <div class="title">
@@ -123,7 +123,7 @@
                     <div class="title">Thông tin đặt hàng</div>
                     <div class="p-4">
                         <div class="form-group" style="margin-bottom: 5px;">
-                            <label for="customerPhone">Họ tên đầy đủ</label>
+                            <label for="customerPhone">Họ tên (*)</label>
                             <input type="tel" class="form-control" id="customerFullName" name="customerFullName" value="${userLogined.name }" placeholder="Full name">
                         </div>
                         <div class="form-group" style="margin-bottom: 5px;">
@@ -132,12 +132,24 @@
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group" style="margin-bottom: 5px;">
-                            <label for="customerPhone">Số điện thoại</label>
+                            <label for="customerPhone">Số điện thoại (*)</label>
                             <input type="tel" class="form-control" id="customerPhone" name="customerPhone" value="${userLogined.phone }" placeholder="Phone">
                         </div>
                         <div class="form-group" style="margin-bottom: 5px;">
-                            <label for="customerAddress">Địa chỉ</label>
+                            <label for="customerAddress">Địa chỉ nhận hàng (*)</label>
                             <input type="text" class="form-control" id="customerAddress" name="customerAddress" value="${userLogined.street }" placeholder="Address">
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <label>Phương thức thanh toán</label>
+                        <br>
+                        <div style="font-weight: normal; margin: 10px;">
+                            <input type="radio" id="SHIP_COD" name="fav_language" value="SHIP_COD">
+                            <label for="SHIP_COD" style="font-weight: normal;">COD (Thanh toán khi nhận hàng)</label><br>
+                        </div>
+                        <div style="font-weight: 100; margin: 10px;">
+                            <input type="radio" id="card" name="fav_language" value="card">
+                            <label for="card" style="font-weight: normal;">VNPAY</label><br>
                         </div>
                     </div>
                     <div class="total">
