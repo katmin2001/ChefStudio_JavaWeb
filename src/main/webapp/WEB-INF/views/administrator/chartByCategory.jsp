@@ -123,17 +123,17 @@
 
 
             <!-- Blank Start -->
-            <a href="${base }/admin/revenue-by-category/export">Export excel</a>
             <div class="container-fluid pt-4 px-4">
-<%--                <div class="chart">--%>
-<%--                    <label style="font-size: 30px; font-weight: 600; color: blue">Annual Revenue</label>--%>
-<%--                </div>--%>
-<%--                <canvas id="myChart"></canvas>--%>
                 <div class="vh-100 bg-light rounded align-items-start justify-content-center">
+                    <div style="display: flex; justify-content: space-between; padding: 10px 10px">
                         <div class="chart">
                             <label style="font-size: 30px; font-weight: 600; color: #0d6efd">Revenue By Category</label>
                         </div>
-                        <canvas id="myChart"></canvas>
+                        <div>
+                            <a href="${base }/admin/revenue-by-category/export" class="btn btn-outline-primary mb-1" role="button">Export excel</a>
+                        </div>
+                    </div>
+                    <canvas id="myChart"></canvas>
                 </div>
 
             </div>

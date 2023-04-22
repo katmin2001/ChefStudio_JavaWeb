@@ -138,7 +138,8 @@
 
 <%--                                <button type="submit" class="btn btn-primary" value="Submit">Seach</button>--%>
                             </div>
-                            <a href="${base }/admin/revenue-by-month/export/${disYear }">Export excel</a>
+                            <div><a href="${base }/admin/revenue-by-month/export/${disYear }" class="btn btn-outline-primary mb-1" role="button" style="margin: 20px 20px;">Export excel</a></div>
+
                         </div>
                         <div class="chart" style="margin-top: 20px">
                             <label style="font-size: large; font-weight: 600; color: #0d6efd">Revenue in ${disYear }</label>

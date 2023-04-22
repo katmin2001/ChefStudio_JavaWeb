@@ -123,38 +123,23 @@
 
 
             <!-- Blank Start -->
-            <a href="${base }/admin/revenue-by-year/export">Export excel</a>
+
             <div class="container-fluid pt-4 px-4">
-<%--                <div class="chart">--%>
-<%--                    <label style="font-size: 30px; font-weight: 600; color: blue">Annual Revenue</label>--%>
-<%--                </div>--%>
-<%--                <canvas id="myChart"></canvas>--%>
+
                 <div class="vh-100 bg-light rounded align-items-start justify-content-center">
+                    <div style="display: flex; justify-content: space-between; padding: 10px 10px">
                         <div class="chart">
                             <label style="font-size: 30px; font-weight: 600; color: #0d6efd">Annual Revenue</label>
                         </div>
+                        <div>
+                            <a href="${base }/admin/revenue-by-year/export" class="btn btn-outline-primary mb-1" role="button">Export excel</a>
+                        </div>
+                    </div>
+
                         <canvas id="myChart"></canvas>
                 </div>
 
             </div>
-            <!-- Blank End -->
-
-
-            <!-- Footer Start -->
-            <!-- <div class="container-fluid pt-4 px-4">
-                <div class="bg-light rounded-top p-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
-                        </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- Footer End -->
         </div>
         <!-- Content End -->
 
