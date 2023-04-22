@@ -1,4 +1,4 @@
-package enumType;
+package com.devpro.javaweb.enumType;
 
 public enum OrderStatus {
     SHIPPING("Đang vận chuyển"),

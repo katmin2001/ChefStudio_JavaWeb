@@ -29,18 +29,22 @@ public class SaleOrderController extends BaseController {
     @Autowired()
     private SaleOrderService saleOrderService;
     @RequestMapping(value = { "/order/me" }, method = RequestMethod.GET)
-    public Object cartCheckout(final Model model,
+    public Object showOrder(final Model model,
                                final HttpServletRequest request,
                                final HttpServletResponse response,
                                @ModelAttribute("userLogined") User userLogined) throws IOException {
-        List<OrderDetail> orderDetailList = orderDetailService.getOrders(userLogined);
-        List<OrderDetail> newOrderDetailList = new ArrayList<>();
-        for (OrderDetail orderDetail: orderDetailList) {
-            SaleOrder saleOrder = saleOrderService.findByCode(orderDetail.getCode());
-            orderDetail.setCreatedDate(saleOrder.getCreatedDate());
-            newOrderDetailList.add(orderDetail);
-        }
-        model.addAttribute("myOrders", newOrderDetailList);
+        model.addAttribute("myOrders", saleOrderService.findOrderById(userLogined.getId()));
         return "customer/info"; // -> đường dẫn tới View.
+    }
+    @RequestMapping(value = { "/order/me/{code}" }, method = RequestMethod.GET)
+    public Object cartCheckout(final Model model,
+                               final HttpServletRequest request,
+                               final HttpServletResponse response,
+                               @ModelAttribute("userLogined") User userLogined,
+                               @PathVariable("code") String code) throws IOException {
+        model.addAttribute("code",code);
+        List<OrderDetail> orderDetailList = orderDetailService.getCusOrders(userLogined,code);
+        model.addAttribute("myOrders", orderDetailList);
+        return "customer/info-detail"; // -> đường dẫn tới View.
     }
 }

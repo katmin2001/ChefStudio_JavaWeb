@@ -92,47 +92,37 @@
     </div>
     <div class="row">
       <div class="col3"></div>
-      <div class="col6">
-        <h2 style="font-size: 32px;font-weight: 100;">Lịch sử
-          mua hàng</h2>
-        <hr>
+      <div class="col6" style="display: flex">
+        <h2 style="font-size: 32px;font-weight: 100">Chi tiết đơn hàng:&nbsp;</h2>
+        <h2 style="color: #e18037;font-size: 32px;font-weight: 400"> ${code }</h2>
       </div>
     </div>
     <div>
       <table>
         <tr>
           <th>STT</th>
-          <th>Mã đơn hàng</th>
-          <th>Thành tiền</th>
+          <th>Ảnh</th>
+          <th>Tên sản phẩm</th>
+          <th>Số lượng</th>
+          <th>Giá</th>
+          <th>Khuyến mãi</th>
           <th>Ngày đặt hàng</th>
-          <th>Trạng thái</th>
-          <th>Thao tác</th>
         </tr>
         <c:forEach items="${myOrders }" var="myOrders" varStatus="loop">
         <tr>
           <td>${loop.index+1}</td>
-          <td>${myOrders.code }</td>
-          <td>${myOrders.total }</td>
+          <td  class="center"> <img src="${base}/upload/${myOrders.avatar }" alt="" style="width: 100px; height: 100px; text-align: center;"></td>
+          <td>${myOrders.title }</td>
+          <td>${myOrders.quality}</td>
+          <td>${myOrders.price }</td>
+          <td>${((myOrders.price-myOrders.priceSale)/ myOrders.price)*100}%</td>
           <td>${myOrders.createdDate }</td>
-          <td>${myOrders.order_status }</td>
-          <td>
-            <a href="${base }/order/me/${myOrders.code }" class="button" style="display: flex;margin-bottom: 5px;background-color: #e18037;color: white;padding: 10px;border-radius: 20px;justify-content: center;font-weight: 600;">Chi tiết</a>
-            <a href="" class="button" style="display: flex;
-              background-color: red;
-              color: white;
-              padding: 10px;
-              border-radius: 20px;
-              justify-content: center;
-              font-weight: 600; margin-bottom: 5px;">Huỷ đơn hàng</a>
-            <a href="" class="button" style="display: flex;background-color: blue;color: white;padding: 10px;border-radius: 20px;justify-content: center;font-weight: 600;">Đã nhận hàng</a>
-          </td>
         </tr>
         </c:forEach>
       </table>
     </div>
   </div>
 </div>
-
 
 <jsp:include page="/WEB-INF/views/customer/layout/footer.jsp"></jsp:include>
 </body>

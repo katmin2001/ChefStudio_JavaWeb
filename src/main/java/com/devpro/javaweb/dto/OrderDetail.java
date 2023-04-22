@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Entity()
 public class OrderDetail extends BaseEntity {
     private String title;
     private BigDecimal price;
@@ -15,6 +14,15 @@ public class OrderDetail extends BaseEntity {
     private Date createdDate;
     private String code;
     private String avatar;
+    private String status_order;
+
+    public String getStatus_order() {
+        return status_order;
+    }
+
+    public void setStatus_order(String status_order) {
+        this.status_order = status_order;
+    }
 
     public String getTitle() {
         return title;

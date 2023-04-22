@@ -1,6 +1,6 @@
 package com.devpro.javaweb.model;
 
-import enumType.OrderStatus;
+import com.devpro.javaweb.enumType.OrderStatus;
 
 import java.math.BigDecimal;
 import java.util.HashSet;

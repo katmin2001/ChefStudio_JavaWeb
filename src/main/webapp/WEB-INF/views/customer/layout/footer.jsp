@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col1">
                         <div class="lg">
-                            <a href=""><img src="../images/logo.png" style="max-width: 150px; height: 50px"></a>
+                            <a href=""><img src="http://localhost:8081/images/logo.png" style="max-width: 150px; height: 50px"></a>
                         </div>
                         <div class="info">
                             <div class="if">
