@@ -1,17 +1,12 @@
 package com.devpro.javaweb.model;
 
+import enumType.OrderStatus;
+
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tbl_saleorder")
@@ -36,6 +31,11 @@ public class SaleOrder extends BaseEntity {
 
 	@Column(name = "seo")
 	private String seo;
+
+	@Column(name = "status_order")
+	@Enumerated(EnumType.STRING)
+	private OrderStatus order_status;
+
 
 	@OneToMany(cascade = CascadeType.ALL, 
 			   mappedBy = "saleOrder", 
@@ -126,4 +126,11 @@ public class SaleOrder extends BaseEntity {
 		this.user = user;
 	}
 
+	public OrderStatus getOrder_status() {
+		return order_status;
+	}
+
+	public void setOrder_status(OrderStatus order_status) {
+		this.order_status = order_status;
+	}
 }
