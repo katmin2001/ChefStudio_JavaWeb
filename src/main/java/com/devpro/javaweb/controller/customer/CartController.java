@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.devpro.javaweb.model.User;
-import com.devpro.javaweb.enumType.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -104,7 +103,7 @@ public class CartController extends BaseController {
 			}
 		}
 		saleOrder.setTotal(calculateTotalPrice(request));
-		saleOrder.setOrder_status(OrderStatus.SHIPPING);
+		saleOrder.setOrder_status("Đang vận chuyển");
 		// lưu vào database
 		saleOrderService.saveOrUpdate(saleOrder);
 //		reset lai gio hang cua session hien tai

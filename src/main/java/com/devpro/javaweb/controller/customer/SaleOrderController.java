@@ -33,7 +33,7 @@ public class SaleOrderController extends BaseController {
                                final HttpServletRequest request,
                                final HttpServletResponse response,
                                @ModelAttribute("userLogined") User userLogined) throws IOException {
-        model.addAttribute("myOrders", saleOrderService.findOrderById(userLogined.getId()));
+        model.addAttribute("myOrders", saleOrderService.findOrderByUserId(userLogined.getId()));
         return "customer/info"; // -> đường dẫn tới View.
     }
     @RequestMapping(value = { "/order/me/{code}" }, method = RequestMethod.GET)
@@ -42,9 +42,33 @@ public class SaleOrderController extends BaseController {
                                final HttpServletResponse response,
                                @ModelAttribute("userLogined") User userLogined,
                                @PathVariable("code") String code) throws IOException {
-        model.addAttribute("code",code);
+        model.addAttribute("code", code);
         List<OrderDetail> orderDetailList = orderDetailService.getCusOrders(userLogined,code);
         model.addAttribute("myOrders", orderDetailList);
         return "customer/info-detail"; // -> đường dẫn tới View.
+    }
+
+    @RequestMapping(value = { "/order/cancel/{code}" }, method = RequestMethod.GET)
+    public Object cancelOrder(final Model model,
+                              final HttpServletRequest request,
+                              final HttpServletResponse response,
+                              @ModelAttribute("userLogined") User userLogined,
+                              @PathVariable("code") String code) throws IOException {
+        SaleOrder saleOrder = saleOrderService.findByCode(code);
+        saleOrder.setOrder_status("Đã huỷ");
+        saleOrderService.addOrUpdate(saleOrder);
+        return "redirect:/order/me"; // -> đường dẫn tới View.
+    }
+
+    @RequestMapping(value = { "/order/success/{code}" }, method = RequestMethod.GET)
+    public Object successOrder(final Model model,
+                               final HttpServletRequest request,
+                               final HttpServletResponse response,
+                               @ModelAttribute("userLogined") User userLogined,
+                               @PathVariable("code") String code) throws IOException {
+        SaleOrder saleOrder = saleOrderService.findByCode(code);
+        saleOrder.setOrder_status("Nhận hàng thành công");
+        saleOrderService.addOrUpdate(saleOrder);
+        return "redirect:/order/me"; // -> đường dẫn tới View.
     }
 }

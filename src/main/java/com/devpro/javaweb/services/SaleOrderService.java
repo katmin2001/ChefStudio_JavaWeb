@@ -33,7 +33,7 @@ public class SaleOrderService extends BaseService<SaleOrder> {
 		String sql = "select * from tbl_saleorder s where s.code = " + code;
 		return this.getEntityByNativeSQL(sql);
 	}
-	public List<SaleOrder> findOrderById(int id){
+	public List<SaleOrder> findOrderByUserId(int id){
 		String sql = "select * from tbl_saleorder s where s.user_id = " + id;
 		return this.getEntitiesByNativeSQL(sql);
 	}

@@ -117,14 +117,16 @@
           <td>${myOrders.order_status }</td>
           <td>
             <a href="${base }/order/me/${myOrders.code }" class="button" style="display: flex;margin-bottom: 5px;background-color: #e18037;color: white;padding: 10px;border-radius: 20px;justify-content: center;font-weight: 600;">Chi tiết</a>
-            <a href="" class="button" style="display: flex;
+            <c:if test = "${myOrders.order_status == 'Đang vận chuyển'}">
+              <a href="${base }/order/cancel/${myOrders.code }" class="button" style="display: flex;
               background-color: red;
               color: white;
               padding: 10px;
               border-radius: 20px;
               justify-content: center;
-              font-weight: 600; margin-bottom: 5px;">Huỷ đơn hàng</a>
-            <a href="" class="button" style="display: flex;background-color: blue;color: white;padding: 10px;border-radius: 20px;justify-content: center;font-weight: 600;">Đã nhận hàng</a>
+              font-weight: 600; margin-bottom: 5px;", onclick="confirm(`Huỷ đơn hàng ${myOrders.code } thành công`)">Huỷ đơn hàng</a>
+              <a href="${base }/order/success/${myOrders.code }" class="button" style="display: flex;background-color: blue;color: white;padding: 10px;border-radius: 20px;justify-content: center;font-weight: 600;">Đã nhận hàng</a>
+            </c:if>
           </td>
         </tr>
         </c:forEach>

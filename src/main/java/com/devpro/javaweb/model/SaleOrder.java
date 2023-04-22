@@ -1,7 +1,5 @@
 package com.devpro.javaweb.model;
 
-import com.devpro.javaweb.enumType.OrderStatus;
-
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,8 +31,7 @@ public class SaleOrder extends BaseEntity {
 	private String seo;
 
 	@Column(name = "status_order")
-	@Enumerated(EnumType.STRING)
-	private OrderStatus order_status;
+	private String order_status;
 
 
 	@OneToMany(cascade = CascadeType.ALL, 
@@ -126,11 +123,11 @@ public class SaleOrder extends BaseEntity {
 		this.user = user;
 	}
 
-	public OrderStatus getOrder_status() {
+	public String getOrder_status() {
 		return order_status;
 	}
 
-	public void setOrder_status(OrderStatus order_status) {
+	public void setOrder_status(String order_status) {
 		this.order_status = order_status;
 	}
 }
