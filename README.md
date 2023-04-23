@@ -8,6 +8,6 @@ Note 14/4
 
 Note 20/4
 - Admin: xuất ra bản thống kê doanh thu excel :heavy_check_mark:
-- Fix trạng thái đơn hàng (Set status bill) 
+- Fix trạng thái đơn hàng (Set status bill) :heavy_check_mark:
 + Customer : thêm button Huỷ đơn hàng và Đã nhận hàng :heavy_check_mark:
 + Admin: thêm button xác nhận
