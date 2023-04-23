@@ -7,7 +7,7 @@ Note 14/4
 + Xem danh sách sản phẩm mua trong từng bill (View) :heavy_check_mark:
 
 Note 20/4
-- Admin: xuất ra bản thống kê doanh thu excel 
-- Fix trạng thái đơn hàng (Set status bill)
-+ Customer : thêm button Huỷ đơn hàng và Đã nhận hàng
+- Admin: xuất ra bản thống kê doanh thu excel :heavy_check_mark:
+- Fix trạng thái đơn hàng (Set status bill) 
++ Customer : thêm button Huỷ đơn hàng và Đã nhận hàng :heavy_check_mark:
 + Admin: thêm button xác nhận
