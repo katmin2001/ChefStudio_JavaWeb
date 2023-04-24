@@ -117,7 +117,7 @@
                         
                     </div>
             </div>
-        <form action="${base }/cart/checkout" method="post" class="form-1">
+        <form action="${base }/create-payment" method="post" class="form-1">
             <div class="bill">
                 <div class="sb_cart">
                     <div class="title">Thông tin đặt hàng</div>
@@ -189,6 +189,10 @@
 
             if (valueCheck === "NOT_ENOUGH") {
                 alert("Không đủ sản phẩm!");
+            }
+
+            if (valueCheck === "FAILED") {
+                alert("Thanh toán thất bại!");
             }
 
         }
