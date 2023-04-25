@@ -11,3 +11,5 @@ Note 20/4
 - Fix trạng thái đơn hàng (Set status bill) :heavy_check_mark:
 + Customer : thêm button Huỷ đơn hàng và Đã nhận hàng :heavy_check_mark:
 + Admin: thêm button xác nhận
+
+Link demo thanh toán: https://sandbox.vnpayment.vn/apis/vnpay-demo/?fbclid=IwAR2oiWyDIsf5D7LLvn7wXt77lk930jEzBSkyvSEiuexmtYYmgLydFdJFpPY
