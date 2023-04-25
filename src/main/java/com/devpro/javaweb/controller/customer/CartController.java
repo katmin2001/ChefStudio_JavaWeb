@@ -102,6 +102,8 @@ public class CartController extends BaseController {
 		String customerEmail = request.getParameter("customerEmail");
 		String customerPhone = request.getParameter("customerPhone");
 		String customerAddress = request.getParameter("customerAddress");
+		String payment = request.getParameter("fav_language");
+		System.out.println(payment);
 
 		// tạo hóa đơn + với thông tin khách hàng lấy được
 		SaleOrder saleOrder = new SaleOrder();
@@ -142,60 +144,71 @@ public class CartController extends BaseController {
 		saleOrder.setTotal(calculateTotalPrice(request));
 		saleOrder.setOrder_status("Đang vận chuyển");
 		session.setAttribute("saleOrder", saleOrder);
+		if(payment.equals("card")) {
+			//thanh toan VNPAY
+			int amount = this.calculateTotalPrice(request).intValue() * 100;
+			Map<String, String> vnp_Params = new HashMap<>();
+			vnp_Params.put("vnp_Version", PaymentConf.VNPAY_VERSION);
+			vnp_Params.put("vnp_Command", PaymentConf.COMMAND);
+			vnp_Params.put("vnp_TmnCode", PaymentConf.TMN_CODE);
+			vnp_Params.put("vnp_Amount", String.valueOf(amount));
+			vnp_Params.put("vnp_CurrCode", PaymentConf.CURRENT_CODE);
+			vnp_Params.put("vnp_TxnRef", String.valueOf(System.currentTimeMillis()));
+			vnp_Params.put("vnp_OrderInfo", "Noi dung chuyen tien");
+			vnp_Params.put("vnp_Locale", PaymentConf.LOCALE);
+			vnp_Params.put("vnp_ReturnUrl", PaymentConf.RETURN_URL);
+			vnp_Params.put("vnp_IpAddr", PaymentConf.IP_DEFAULT);
 
-		int amount = this.calculateTotalPrice(request).intValue() * 100;
-		Map<String, String> vnp_Params = new HashMap<>();
-		vnp_Params.put("vnp_Version", PaymentConf.VNPAY_VERSION);
-		vnp_Params.put("vnp_Command", PaymentConf.COMMAND);
-		vnp_Params.put("vnp_TmnCode", PaymentConf.TMN_CODE);
-		vnp_Params.put("vnp_Amount", String.valueOf(amount));
-		vnp_Params.put("vnp_CurrCode", PaymentConf.CURRENT_CODE);
-		vnp_Params.put("vnp_TxnRef", String.valueOf(System.currentTimeMillis()));
-		vnp_Params.put("vnp_OrderInfo", "Noi dung chuyen tien");
-		vnp_Params.put("vnp_Locale", PaymentConf.LOCALE);
-		vnp_Params.put("vnp_ReturnUrl", PaymentConf.RETURN_URL);
-		vnp_Params.put("vnp_IpAddr", PaymentConf.IP_DEFAULT);
+			Date date = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+			String dateString = formatter.format(date);
+			vnp_Params.put("vnp_CreateDate", dateString);
 
-		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-		String dateString = formatter.format(date);
-		vnp_Params.put("vnp_CreateDate", dateString);
+			List fieldNames = new ArrayList(vnp_Params.keySet());
+			Collections.sort(fieldNames);
 
-		List fieldNames = new ArrayList(vnp_Params.keySet());
-		Collections.sort(fieldNames);
+			StringBuilder hashData = new StringBuilder();
+			StringBuilder query = new StringBuilder();
 
-		StringBuilder hashData = new StringBuilder();
-		StringBuilder query = new StringBuilder();
+			Iterator itr = fieldNames.iterator();
+			while (itr.hasNext()) {
+				String fieldName = (String) itr.next();
+				String fieldValue = vnp_Params.get(fieldName);
+				if ((fieldValue != null) && (fieldValue.length() > 0)) {
 
-		Iterator itr = fieldNames.iterator();
-		while (itr.hasNext()) {
-			String fieldName = (String) itr.next();
-			String fieldValue = vnp_Params.get(fieldName);
-			if ((fieldValue != null) && (fieldValue.length() > 0)) {
+					// Build hash data
+					hashData.append(fieldName);
+					hashData.append('=');
+					hashData.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
 
-				// Build hash data
-				hashData.append(fieldName);
-				hashData.append('=');
-				hashData.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
+					// Build query
+					query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII.toString()));
+					query.append('=');
+					query.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
 
-				// Build query
-				query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII.toString()));
-				query.append('=');
-				query.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
-
-				if (itr.hasNext()) {
-					query.append('&');
-					hashData.append('&');
+					if (itr.hasNext()) {
+						query.append('&');
+						hashData.append('&');
+					}
 				}
 			}
-		}
-		String queryUrl = query.toString();
-		DataUtil dataUtil = new DataUtil();
-		String vnp_SecureHash = dataUtil.sha256(PaymentConf.CHECKSUM + hashData);
-		queryUrl += "&vnp_SecureHashType=SHA256&vnp_SecureHash=" + vnp_SecureHash;
-		String paymentUrl = PaymentConf.VNPAY_URL + "?" + queryUrl;
+			String queryUrl = query.toString();
+			DataUtil dataUtil = new DataUtil();
+			String vnp_SecureHash = dataUtil.sha256(PaymentConf.CHECKSUM + hashData);
+			queryUrl += "&vnp_SecureHashType=SHA256&vnp_SecureHash=" + vnp_SecureHash;
+			String paymentUrl = PaymentConf.VNPAY_URL + "?" + queryUrl;
 
-		return "redirect:" + paymentUrl;
+			return "redirect:" + paymentUrl;
+		}
+		else{
+			// lưu vào database
+			saleOrderService.saveOrUpdate(saleOrder);
+//		reset lai gio hang cua session hien tai
+			session.setAttribute("cart", null);
+			session.setAttribute("totalItems", 0);
+			model.addAttribute("mess", "OK");
+			return "customer/cart";
+		}
 	}
 
 	/**
