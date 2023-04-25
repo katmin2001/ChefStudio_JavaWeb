@@ -195,6 +195,10 @@
                 alert("Thanh toán thất bại!");
             }
 
+            if (valueCheck === "PAYMENT_MISSING") {
+                alert("Vui lòng chọn phương thức thanh toán!");
+            }
+
         }
 
     </script>

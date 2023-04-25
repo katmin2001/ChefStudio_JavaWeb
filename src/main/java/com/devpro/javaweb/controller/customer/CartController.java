@@ -144,7 +144,12 @@ public class CartController extends BaseController {
 		saleOrder.setTotal(calculateTotalPrice(request));
 		saleOrder.setOrder_status("Đang vận chuyển");
 		session.setAttribute("saleOrder", saleOrder);
-		if(payment.equals("card")) {
+
+		if (payment == null) {
+			model.addAttribute("mess", "PAYMENT_MISSING");
+			return "customer/cart"; // -> đường dẫn tới View.
+		}
+		if (payment.equals("card")) {
 			//thanh toan VNPAY
 			int amount = this.calculateTotalPrice(request).intValue() * 100;
 			Map<String, String> vnp_Params = new HashMap<>();
@@ -200,10 +205,17 @@ public class CartController extends BaseController {
 
 			return "redirect:" + paymentUrl;
 		}
-		else{
-			// lưu vào database
+		else {
+			for (SaleOrderProducts orderProducts: saleOrder.getSaleOrderProducts()) {
+				Product p = productService.getById(orderProducts.getProduct().getId());
+				p.setQuantity(p.getQuantity() - orderProducts.getQuality());
+				// Hết hàng thì status = false
+				if (p.getQuantity() == 0) {
+					p.setStatus(false);
+				}
+				productService.saveOrUpdate(p);
+			}
 			saleOrderService.saveOrUpdate(saleOrder);
-//		reset lai gio hang cua session hien tai
 			session.setAttribute("cart", null);
 			session.setAttribute("totalItems", 0);
 			model.addAttribute("mess", "OK");
